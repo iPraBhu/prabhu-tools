@@ -4,7 +4,6 @@ import { NavItem } from '../types';
 const navigation: NavItem[] = [
   { name: 'Home', path: '/' },
   { name: 'Tools', path: '/tools' },
-  { name: 'GitHub', path: 'https://github.com/iPraBhu/prabhu-tools', external: true },
 ];
 
 export default function Header() {

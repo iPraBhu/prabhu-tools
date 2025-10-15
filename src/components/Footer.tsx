@@ -13,9 +13,7 @@ export default function Footer() {
           {/* Links */}
           <div className="flex space-x-6 text-sm">
             <a 
-              href="https://github.com/iPraBhu/prabhu-tools" 
-              target="_blank" 
-              rel="noopener noreferrer"
+              href="#" 
               className="text-gray-400 hover:text-white transition-colors duration-200"
               aria-label="Visit our GitHub repository"
             >
@@ -39,7 +37,7 @@ export default function Footer() {
         
         {/* Additional info */}
         <div className="mt-6 pt-6 border-t border-gray-700 text-center text-xs text-gray-500">
-          Built with React, TypeScript, and Tailwind CSS. Deployed on GitHub Pages.
+          Built with React, TypeScript, and Tailwind CSS.
         </div>
       </div>
     </footer>

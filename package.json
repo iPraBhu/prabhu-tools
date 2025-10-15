@@ -4,11 +4,6 @@
   "version": "1.0.0",
   "description": "Smart Tools for Everyday Use - A collection of useful calculators and utilities",
   "keywords": ["tools", "calculator", "finance", "utilities"],
-  "homepage": "https://iprabhu.github.io/prabhu-tools",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iPraBhu/prabhu-tools.git"
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
