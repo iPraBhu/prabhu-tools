@@ -57,6 +57,12 @@ temp/
 # Optional eslint cache
 .eslintcache
 
+# TypeScript cache
+*.tsbuildinfo
+
+# Vite
+.vite
+
 # Microbundle cache
 .rpt2_cache/
 .rts2_cache_cjs/
@@ -85,6 +91,12 @@ temp/
 # Storybook build outputs
 .out
 .storybook-out
+
+# Vitest
+coverage/
+
+# Local development
+.local
 
 # Temporary folders
 tmp/
