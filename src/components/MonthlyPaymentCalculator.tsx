@@ -22,7 +22,7 @@ interface FormErrors {
 interface FormData {
   loanAmount: string;
   annualInterestRate: string;
-  loanTermYears: string;
+  loanTermMonths: string; // Changed from Years to Months
   extraMonthlyPayment: string;
 }
 
@@ -31,7 +31,7 @@ export default function MonthlyPaymentCalculator() {
     loadFromLocalStorage(STORAGE_KEY, {
       loanAmount: '',
       annualInterestRate: '',
-      loanTermYears: '',
+      loanTermMonths: '', // Updated default field
       extraMonthlyPayment: '',
     })
   );
@@ -39,6 +39,7 @@ export default function MonthlyPaymentCalculator() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [result, setResult] = useState<LoanResult | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [isTermInMonths, setIsTermInMonths] = useState(true); // State to toggle between months and years
 
   // Save form data to localStorage whenever it changes
   useEffect(() => {
@@ -46,10 +47,7 @@ export default function MonthlyPaymentCalculator() {
   }, [formData]);
 
   const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     
     // Clear error for this field when user starts typing
     if (errors[field]) {
@@ -63,20 +61,31 @@ export default function MonthlyPaymentCalculator() {
   const convertFormData = (): LoanCalculation | null => {
     const loanAmount = parseFloat(formData.loanAmount) || 0;
     const annualInterestRate = parseFloat(formData.annualInterestRate) || 0;
-    const loanTermYears = parseFloat(formData.loanTermYears) || 0;
+    const loanTermInput = parseFloat(formData.loanTermMonths) || 0;
     const extraMonthlyPayment = parseFloat(formData.extraMonthlyPayment) || 0;
+
+    // Convert to months if the input is in years
+    const loanTermMonths = isTermInMonths ? loanTermInput : loanTermInput * 12;
+
+    // Ensure all values are valid numbers
+    if (isNaN(loanAmount) || isNaN(annualInterestRate) || isNaN(loanTermMonths) || isNaN(extraMonthlyPayment)) {
+      return null;
+    }
 
     return {
       loanAmount,
       annualInterestRate,
-      loanTermYears,
+      loanTermMonths,
       extraMonthlyPayment,
     };
   };
 
   const handleCalculate = () => {
     const calculationData = convertFormData();
-    if (!calculationData) return;
+
+    if (!calculationData) {
+      return;
+    }
 
     setIsCalculating(true);
     
@@ -115,7 +124,7 @@ export default function MonthlyPaymentCalculator() {
     const emptyFormData: FormData = {
       loanAmount: '',
       annualInterestRate: '',
-      loanTermYears: '',
+      loanTermMonths: '',
       extraMonthlyPayment: '',
     };
     setFormData(emptyFormData);
@@ -124,10 +133,23 @@ export default function MonthlyPaymentCalculator() {
     saveToLocalStorage(STORAGE_KEY, emptyFormData);
   };
 
+  const toggleTermUnit = () => {
+    const currentValue = parseFloat(formData.loanTermMonths) || 0;
+    
+    setFormData((prev) => ({
+      ...prev,
+      loanTermMonths: isTermInMonths
+        ? (currentValue / 12).toString() // Convert months to years
+        : (currentValue * 12).toString(), // Convert years to months
+    }));
+    
+    setIsTermInMonths((prev) => !prev);
+  };
+
   const isFormValid = () => {
     const data = convertFormData();
     if (!data) return false;
-    return data.loanAmount > 0 && data.annualInterestRate >= 0 && data.loanTermYears > 0;
+    return data.loanAmount > 0 && data.annualInterestRate >= 0 && data.loanTermMonths > 0;
   };
 
   return (
@@ -201,25 +223,32 @@ export default function MonthlyPaymentCalculator() {
 
             {/* Loan Term */}
             <div>
-              <label htmlFor="loanTermYears" className="block text-sm font-medium text-gray-700 mb-2">
-                Loan Term (Years)
+              <label htmlFor="loanTerm" className="block text-sm font-medium text-gray-700 mb-2">
+                Loan Term ({isTermInMonths ? 'Months' : 'Years'})
               </label>
               <input
                 type="number"
-                id="loanTermYears"
-                value={formData.loanTermYears}
-                onChange={(e) => handleInputChange('loanTermYears', e.target.value)}
-                className={`input-field ${errors.loanTermYears ? 'input-error' : ''}`}
-                placeholder="30"
+                id="loanTerm"
+                value={formData.loanTermMonths}
+                onChange={(e) => handleInputChange('loanTermMonths', e.target.value)}
+                className={`input-field ${errors.loanTermMonths ? 'input-error' : ''}`}
+                placeholder={isTermInMonths ? "360" : "30"} // Default to months
                 min="1"
-                max="50"
+                max={isTermInMonths ? 600 : 50} // Adjust range based on unit
                 step="1"
                 inputMode="numeric"
-                aria-describedby={errors.loanTermYears ? 'loanTermYears-error' : undefined}
+                aria-describedby={errors.loanTermMonths ? 'loanTermMonths-error' : undefined}
               />
-              {errors.loanTermYears && (
-                <p id="loanTermYears-error" className="error-text" role="alert">
-                  {errors.loanTermYears}
+              <button
+                type="button"
+                onClick={toggleTermUnit}
+                className="mt-2 text-blue-500 underline text-sm"
+              >
+                Switch to {isTermInMonths ? 'Years' : 'Months'}
+              </button>
+              {errors.loanTermMonths && (
+                <p id="loanTermMonths-error" className="error-text" role="alert">
+                  {errors.loanTermMonths}
                 </p>
               )}
             </div>

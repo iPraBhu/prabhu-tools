@@ -87,12 +87,15 @@ export function calculatePayoffTimeWithExtra(
  * Complete loan calculation with all results
  */
 export function calculateLoan(params: LoanCalculation): LoanResult {
-  const { loanAmount, annualInterestRate, loanTermYears, extraMonthlyPayment = 0 } = params;
+  const { loanAmount, annualInterestRate, loanTermMonths, extraMonthlyPayment = 0 } = params;
+  
+  // Convert months to years for existing calculation functions
+  const loanTermYears = loanTermMonths / 12;
   
   const monthlyPayment = calculateMonthlyPayment(loanAmount, annualInterestRate, loanTermYears);
   const totalInterest = calculateTotalInterest(monthlyPayment, loanTermYears, loanAmount);
-  const totalPaid = monthlyPayment * loanTermYears * 12;
-  const payoffTimeMonths = loanTermYears * 12;
+  const totalPaid = monthlyPayment * loanTermMonths;
+  const payoffTimeMonths = loanTermMonths;
   
   let payoffTimeSavings: number | undefined;
   
@@ -120,29 +123,29 @@ export function calculateLoan(params: LoanCalculation): LoanResult {
  */
 export function validateLoanInputs(params: Partial<LoanCalculation>): FormValidation {
   const errors: ValidationError[] = [];
-  
+
   if (!params.loanAmount || params.loanAmount <= 0) {
     errors.push({ field: 'loanAmount', message: 'Loan amount must be greater than $0' });
   } else if (params.loanAmount > 10000000) {
     errors.push({ field: 'loanAmount', message: 'Loan amount cannot exceed $10,000,000' });
   }
-  
+
   if (params.annualInterestRate === undefined || params.annualInterestRate < 0) {
     errors.push({ field: 'annualInterestRate', message: 'Interest rate cannot be negative' });
   } else if (params.annualInterestRate > 50) {
     errors.push({ field: 'annualInterestRate', message: 'Interest rate cannot exceed 50%' });
   }
-  
-  if (!params.loanTermYears || params.loanTermYears <= 0) {
-    errors.push({ field: 'loanTermYears', message: 'Loan term must be greater than 0 years' });
-  } else if (params.loanTermYears > 50) {
-    errors.push({ field: 'loanTermYears', message: 'Loan term cannot exceed 50 years' });
+
+  if (!params.loanTermMonths || params.loanTermMonths <= 0) {
+    errors.push({ field: 'loanTermMonths', message: 'Loan term must be greater than 0 months' });
+  } else if (params.loanTermMonths > 600) {
+    errors.push({ field: 'loanTermMonths', message: 'Loan term cannot exceed 600 months (50 years)' });
   }
-  
+
   if (params.extraMonthlyPayment && params.extraMonthlyPayment < 0) {
     errors.push({ field: 'extraMonthlyPayment', message: 'Extra payment cannot be negative' });
   }
-  
+
   return {
     isValid: errors.length === 0,
     errors,

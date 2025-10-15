@@ -79,7 +79,7 @@ describe('Finance calculations', () => {
       const params = {
         loanAmount: 300000,
         annualInterestRate: 4.5,
-        loanTermYears: 30,
+        loanTermMonths: 360, // 30 years * 12 months
         extraMonthlyPayment: 0,
       };
       
@@ -96,7 +96,7 @@ describe('Finance calculations', () => {
       const params = {
         loanAmount: 300000,
         annualInterestRate: 4.5,
-        loanTermYears: 30,
+        loanTermMonths: 360, // 30 years * 12 months
         extraMonthlyPayment: 200,
       };
       
@@ -109,7 +109,7 @@ describe('Finance calculations', () => {
       const params = {
         loanAmount: 123456.789,
         annualInterestRate: 3.33333,
-        loanTermYears: 25,
+        loanTermMonths: 300, // 25 years * 12 months
         extraMonthlyPayment: 0,
       };
       
@@ -127,7 +127,7 @@ describe('Finance calculations', () => {
       const params = {
         loanAmount: 300000,
         annualInterestRate: 4.5,
-        loanTermYears: 30,
+        loanTermMonths: 360, // 30 years * 12 months
         extraMonthlyPayment: 200,
       };
       
@@ -140,7 +140,7 @@ describe('Finance calculations', () => {
       const params = {
         loanAmount: 0,
         annualInterestRate: 4.5,
-        loanTermYears: 30,
+        loanTermMonths: 360, // 30 years * 12 months
       };
       
       const result = validateLoanInputs(params);
@@ -152,7 +152,7 @@ describe('Finance calculations', () => {
       const params = {
         loanAmount: 300000,
         annualInterestRate: -1,
-        loanTermYears: 30,
+        loanTermMonths: 360, // 30 years * 12 months
       };
       
       const result = validateLoanInputs(params);
@@ -164,19 +164,19 @@ describe('Finance calculations', () => {
       const params = {
         loanAmount: 300000,
         annualInterestRate: 4.5,
-        loanTermYears: 0,
+        loanTermMonths: 0,
       };
       
       const result = validateLoanInputs(params);
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(e => e.field === 'loanTermYears')).toBe(true);
+      expect(result.errors.some(e => e.field === 'loanTermMonths')).toBe(true);
     });
 
     it('should fail validation for negative extra payment', () => {
       const params = {
         loanAmount: 300000,
         annualInterestRate: 4.5,
-        loanTermYears: 30,
+        loanTermMonths: 360, // 30 years * 12 months
         extraMonthlyPayment: -100,
       };
       
@@ -189,7 +189,7 @@ describe('Finance calculations', () => {
       const params = {
         loanAmount: 20000000, // > 10M limit
         annualInterestRate: 75, // > 50% limit
-        loanTermYears: 100, // > 50 years limit
+        loanTermMonths: 1200, // > 600 months (50 years) limit
       };
       
       const result = validateLoanInputs(params);

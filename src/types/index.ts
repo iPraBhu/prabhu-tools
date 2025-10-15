@@ -2,7 +2,7 @@
 export interface LoanCalculation {
   loanAmount: number;
   annualInterestRate: number;
-  loanTermYears: number;
+  loanTermMonths: number; // Changed from Years to Months
   extraMonthlyPayment?: number;
 }
 
