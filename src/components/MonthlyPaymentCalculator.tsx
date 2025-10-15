@@ -19,8 +19,15 @@ interface FormErrors {
   [key: string]: string;
 }
 
+interface FormData {
+  loanAmount: string;
+  annualInterestRate: string;
+  loanTermYears: string;
+  extraMonthlyPayment: string;
+}
+
 export default function MonthlyPaymentCalculator() {
-  const [formData, setFormData] = useState<Partial<LoanCalculation>>(() => 
+  const [formData, setFormData] = useState<FormData>(() => 
     loadFromLocalStorage(STORAGE_KEY, {
       loanAmount: '',
       annualInterestRate: '',
@@ -38,7 +45,7 @@ export default function MonthlyPaymentCalculator() {
     saveToLocalStorage(STORAGE_KEY, formData);
   }, [formData]);
 
-  const handleInputChange = (field: keyof LoanCalculation, value: string) => {
+  const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({
       ...prev,
       [field]: value,
@@ -54,10 +61,10 @@ export default function MonthlyPaymentCalculator() {
   };
 
   const convertFormData = (): LoanCalculation | null => {
-    const loanAmount = parseFloat(formData.loanAmount as string) || 0;
-    const annualInterestRate = parseFloat(formData.annualInterestRate as string) || 0;
-    const loanTermYears = parseFloat(formData.loanTermYears as string) || 0;
-    const extraMonthlyPayment = parseFloat(formData.extraMonthlyPayment as string) || 0;
+    const loanAmount = parseFloat(formData.loanAmount) || 0;
+    const annualInterestRate = parseFloat(formData.annualInterestRate) || 0;
+    const loanTermYears = parseFloat(formData.loanTermYears) || 0;
+    const extraMonthlyPayment = parseFloat(formData.extraMonthlyPayment) || 0;
 
     return {
       loanAmount,
@@ -105,15 +112,16 @@ export default function MonthlyPaymentCalculator() {
   };
 
   const handleReset = () => {
-    setFormData({
+    const emptyFormData: FormData = {
       loanAmount: '',
       annualInterestRate: '',
       loanTermYears: '',
       extraMonthlyPayment: '',
-    });
+    };
+    setFormData(emptyFormData);
     setErrors({});
     setResult(null);
-    saveToLocalStorage(STORAGE_KEY, {});
+    saveToLocalStorage(STORAGE_KEY, emptyFormData);
   };
 
   const isFormValid = () => {
@@ -150,7 +158,7 @@ export default function MonthlyPaymentCalculator() {
               <input
                 type="number"
                 id="loanAmount"
-                value={formData.loanAmount || ''}
+                value={formData.loanAmount}
                 onChange={(e) => handleInputChange('loanAmount', e.target.value)}
                 className={`input-field ${errors.loanAmount ? 'input-error' : ''}`}
                 placeholder="250,000"
@@ -174,7 +182,7 @@ export default function MonthlyPaymentCalculator() {
               <input
                 type="number"
                 id="annualInterestRate"
-                value={formData.annualInterestRate || ''}
+                value={formData.annualInterestRate}
                 onChange={(e) => handleInputChange('annualInterestRate', e.target.value)}
                 className={`input-field ${errors.annualInterestRate ? 'input-error' : ''}`}
                 placeholder="4.5"
@@ -199,7 +207,7 @@ export default function MonthlyPaymentCalculator() {
               <input
                 type="number"
                 id="loanTermYears"
-                value={formData.loanTermYears || ''}
+                value={formData.loanTermYears}
                 onChange={(e) => handleInputChange('loanTermYears', e.target.value)}
                 className={`input-field ${errors.loanTermYears ? 'input-error' : ''}`}
                 placeholder="30"
@@ -224,7 +232,7 @@ export default function MonthlyPaymentCalculator() {
               <input
                 type="number"
                 id="extraMonthlyPayment"
-                value={formData.extraMonthlyPayment || ''}
+                value={formData.extraMonthlyPayment}
                 onChange={(e) => handleInputChange('extraMonthlyPayment', e.target.value)}
                 className={`input-field ${errors.extraMonthlyPayment ? 'input-error' : ''}`}
                 placeholder="200"
