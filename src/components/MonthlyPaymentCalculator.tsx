@@ -155,10 +155,10 @@ export default function MonthlyPaymentCalculator() {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
           Monthly Payment Calculator
         </h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Calculate your monthly loan payment, total interest, and see how extra payments 
           can save you money and time.
         </p>
@@ -166,15 +166,15 @@ export default function MonthlyPaymentCalculator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Input Form */}
-        <div className="card">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-slate-700 transition-colors duration-300">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
             Loan Details
           </h2>
           
           <div className="space-y-6">
             {/* Loan Amount */}
             <div>
-              <label htmlFor="loanAmount" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="loanAmount" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Loan Amount ($)
               </label>
               <input
@@ -198,7 +198,7 @@ export default function MonthlyPaymentCalculator() {
 
             {/* Annual Interest Rate */}
             <div>
-              <label htmlFor="annualInterestRate" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="annualInterestRate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Annual Interest Rate (%)
               </label>
               <input
@@ -223,7 +223,7 @@ export default function MonthlyPaymentCalculator() {
 
             {/* Loan Term */}
             <div>
-              <label htmlFor="loanTerm" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="loanTerm" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Loan Term ({isTermInMonths ? 'Months' : 'Years'})
               </label>
               <input
@@ -242,7 +242,7 @@ export default function MonthlyPaymentCalculator() {
               <button
                 type="button"
                 onClick={toggleTermUnit}
-                className="mt-2 text-blue-500 underline text-sm"
+                className="mt-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline text-sm font-medium transition-colors duration-200"
               >
                 Switch to {isTermInMonths ? 'Years' : 'Months'}
               </button>
@@ -255,8 +255,8 @@ export default function MonthlyPaymentCalculator() {
 
             {/* Extra Monthly Payment */}
             <div>
-              <label htmlFor="extraMonthlyPayment" className="block text-sm font-medium text-gray-700 mb-2">
-                Extra Monthly Payment ($) <span className="text-gray-500">(Optional)</span>
+              <label htmlFor="extraMonthlyPayment" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Extra Monthly Payment ($) <span className="text-gray-500 dark:text-gray-400">(Optional)</span>
               </label>
               <input
                 type="number"
@@ -280,8 +280,8 @@ export default function MonthlyPaymentCalculator() {
 
           {/* General Error */}
           {errors.general && (
-            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-red-600 text-sm" role="alert">
+            <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+              <p className="text-red-600 dark:text-red-400 text-sm font-medium" role="alert">
                 {errors.general}
               </p>
             </div>
@@ -318,64 +318,64 @@ export default function MonthlyPaymentCalculator() {
         </div>
 
         {/* Results */}
-        <div className="card">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-slate-700 transition-colors duration-300">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
             Calculation Results
           </h2>
           
           {result ? (
             <div className="space-y-6">
               {/* Monthly Payment */}
-              <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
-                <h3 className="text-lg font-semibold text-primary-900 mb-2">
+              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">
                   Monthly Payment
                 </h3>
-                <p className="text-3xl font-bold text-primary-600">
+                <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">
                   {formatCurrency(result.monthlyPayment)}
                 </p>
               </div>
 
               {/* Total Interest and Total Paid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <h4 className="text-sm font-medium text-gray-700 mb-1">
+                <div className="bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg p-4">
+                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Total Interest
                   </h4>
-                  <p className="text-xl font-semibold text-gray-900">
+                  <p className="text-xl font-semibold text-gray-900 dark:text-white">
                     {formatCurrency(result.totalInterest)}
                   </p>
                 </div>
                 
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <h4 className="text-sm font-medium text-gray-700 mb-1">
+                <div className="bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg p-4">
+                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Total Paid
                   </h4>
-                  <p className="text-xl font-semibold text-gray-900">
+                  <p className="text-xl font-semibold text-gray-900 dark:text-white">
                     {formatCurrency(result.totalPaid)}
                   </p>
                 </div>
               </div>
 
               {/* Payoff Time */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-1">
+              <div className="bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg p-4">
+                <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Payoff Time
                 </h4>
-                <p className="text-lg font-semibold text-gray-900">
+                <p className="text-lg font-semibold text-gray-900 dark:text-white">
                   {formatTimeperiod(result.payoffTimeMonths)}
                 </p>
               </div>
 
               {/* Extra Payment Savings */}
               {result.payoffTimeSavings && result.payoffTimeSavings > 0 && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <h4 className="text-sm font-medium text-green-700 mb-1">
+                <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                  <h4 className="text-sm font-medium text-green-700 dark:text-green-300 mb-1">
                     Time Saved with Extra Payment
                   </h4>
-                  <p className="text-lg font-semibold text-green-900">
+                  <p className="text-lg font-semibold text-green-900 dark:text-green-100">
                     {formatTimeperiod(result.payoffTimeSavings)}
                   </p>
-                  <p className="text-sm text-green-600 mt-1">
+                  <p className="text-sm text-green-600 dark:text-green-400 mt-1">
                     You'll pay off your loan faster!
                   </p>
                 </div>
@@ -383,12 +383,12 @@ export default function MonthlyPaymentCalculator() {
             </div>
           ) : (
             <div className="text-center py-8">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <p className="text-gray-500">
+              <p className="text-gray-500 dark:text-gray-400 font-medium">
                 Enter your loan details and click "Calculate" to see your results.
               </p>
             </div>
@@ -398,23 +398,23 @@ export default function MonthlyPaymentCalculator() {
 
       {/* Formula Explanation */}
       <div className="mt-8 card">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
           How It Works
         </h3>
-        <div className="prose prose-sm text-gray-600">
+        <div className="prose prose-sm text-gray-600 dark:text-gray-300">
           <p className="mb-4">
             The monthly payment is calculated using the standard loan payment formula:
           </p>
-          <div className="bg-gray-50 p-4 rounded-lg font-mono text-sm mb-4">
+          <div className="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg font-mono text-sm mb-4 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-gray-100">
             M = P × r × (1 + r)^n / ((1 + r)^n - 1)
           </div>
-          <div className="text-sm space-y-1">
-            <p><strong>M</strong> = Monthly payment</p>
-            <p><strong>P</strong> = Principal (loan amount)</p>
-            <p><strong>r</strong> = Monthly interest rate (annual rate ÷ 12 ÷ 100)</p>
-            <p><strong>n</strong> = Total number of payments (years × 12)</p>
+          <div className="text-sm space-y-1 text-gray-700 dark:text-gray-300">
+            <p><strong className="text-gray-900 dark:text-white">M</strong> = Monthly payment</p>
+            <p><strong className="text-gray-900 dark:text-white">P</strong> = Principal (loan amount)</p>
+            <p><strong className="text-gray-900 dark:text-white">r</strong> = Monthly interest rate (annual rate ÷ 12 ÷ 100)</p>
+            <p><strong className="text-gray-900 dark:text-white">n</strong> = Total number of payments (years × 12)</p>
           </div>
-          <p className="mt-4 text-xs text-gray-500">
+          <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
             For zero interest loans, the monthly payment is simply the principal divided by the number of months.
           </p>
         </div>
