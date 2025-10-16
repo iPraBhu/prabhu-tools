@@ -21,7 +21,7 @@ export interface Tool {
   description: string;
   icon: string;
   path: string;
-  category: 'finance' | 'converter' | 'utility';
+  category: 'finance' | 'converter' | 'utility' | 'developer';
 }
 
 // Form validation types

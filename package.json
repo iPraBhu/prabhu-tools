@@ -3,6 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "description": "Smart Tools for Everyday Use - A collection of useful calculators and utilities",
+  "homepage": "https://tools.adevguide.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iPraBhu/prabhu-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iPraBhu/prabhu-tools/issues"
+  },
   "keywords": ["tools", "calculator", "finance", "utilities"],
   "scripts": {
     "dev": "vite",

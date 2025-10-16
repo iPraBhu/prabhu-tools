@@ -1,0 +1,22 @@
+/* Grid background patterns for professional design */
+.bg-grid-slate-100 {
+  background-image: linear-gradient(rgba(148, 163, 184, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-grid-slate-700\/25 {
+  background-image: linear-gradient(rgba(51, 65, 85, 0.25) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(51, 65, 85, 0.25) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dark .bg-grid-slate-100 {
+  background-image: none;
+}
+
+.dark .bg-grid-slate-700\/25 {
+  background-image: linear-gradient(rgba(51, 65, 85, 0.25) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(51, 65, 85, 0.25) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
