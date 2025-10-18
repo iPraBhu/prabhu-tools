@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom';
 import MonthlyPaymentCalculator from '../components/MonthlyPaymentCalculator';
+import { useSEO } from '../hooks/useSEO';
 
 export default function Tools() {
+  useSEO({
+    title: 'Free Monthly Loan Payment Calculator | Mortgage & Auto Loan Calculator - PraBhu Tools',
+    description: 'Calculate monthly loan payments for mortgages, auto loans, and personal loans. Free online calculator with amortization schedule, interest calculations, and extra payment savings analysis.',
+    keywords: 'monthly payment calculator, loan calculator, mortgage calculator, auto loan calculator, personal loan calculator, amortization calculator, interest calculator, extra payment calculator, loan payment formula',
+    canonical: 'https://tools.adevguide.com/tools',
+    ogTitle: 'Free Monthly Loan Payment Calculator - PraBhu Tools',
+    ogDescription: 'Calculate monthly loan payments, total interest, and savings from extra payments. Free online calculator for all loan types.',
+  });
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 transition-colors duration-300">
       {/* Breadcrumb Navigation */}

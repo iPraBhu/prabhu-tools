@@ -153,21 +153,21 @@ export default function MonthlyPaymentCalculator() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-          Monthly Payment Calculator
+    <div className="max-w-4xl mx-auto p-4 sm:p-6">
+      <div className="mb-6 sm:mb-8 text-center">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 px-2">
+          Free Monthly Loan Payment Calculator
         </h1>
-        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Calculate your monthly loan payment, total interest, and see how extra payments 
-          can save you money and time.
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto px-4 leading-relaxed">
+          Calculate monthly mortgage payments, auto loan payments, and personal loan costs. 
+          Discover how extra payments can save thousands in interest and reduce your loan term by years.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
         {/* Input Form */}
-        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-slate-700 transition-colors duration-300">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-4 sm:p-6 border border-gray-200 dark:border-slate-700 transition-colors duration-300">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6">
             Loan Details
           </h2>
           
@@ -288,11 +288,11 @@ export default function MonthlyPaymentCalculator() {
           )}
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8">
             <button
               onClick={handleCalculate}
               disabled={!isFormValid() || isCalculating}
-              className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] text-sm sm:text-base"
               aria-label="Calculate monthly payment"
             >
               {isCalculating ? (
@@ -309,7 +309,7 @@ export default function MonthlyPaymentCalculator() {
             </button>
             <button
               onClick={handleReset}
-              className="btn-secondary flex-1"
+              className="btn-secondary flex-1 min-h-[48px] text-sm sm:text-base"
               aria-label="Reset all fields"
             >
               Reset

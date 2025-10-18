@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useSEO } from '../hooks/useSEO';
 
 export default function SpringBootRegexTool() {
+  useSEO({
+    title: 'Java Regex Tester Online | Spring Boot Regex Pattern Validator - PraBhu Tools',
+    description: 'Test and validate Java regular expressions online. Free regex tester for Spring Boot applications with real-time pattern matching, syntax validation, and debugging tools.',
+    keywords: 'java regex tester, spring boot regex, regex validator, regular expressions java, pattern matcher, regex debugger, java regex online, spring boot validation, regex testing tool',
+    canonical: 'https://tools.adevguide.com/tools/spring-boot-regex-tool',
+    ogTitle: 'Java Regex Tester Online - Spring Boot Pattern Validator',
+    ogDescription: 'Test Java regex patterns instantly with our free online regex tester. Perfect for Spring Boot developers.',
+  });
+
   const { theme, toggleTheme } = useTheme();
   const [pattern, setPattern] = useState('');
   const [testString, setTestString] = useState('');
@@ -22,17 +32,17 @@ export default function SpringBootRegexTool() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 py-8 px-4 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 py-6 sm:py-8 px-4 transition-colors duration-300">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex justify-center items-center gap-4 mb-6">
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent text-center px-2">
               Spring Boot Regex Tool
             </h1>
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-white/10 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-gray-700 hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-200"
+              className="p-2 sm:p-3 rounded-lg bg-white/10 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-gray-700 hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
@@ -46,41 +56,41 @@ export default function SpringBootRegexTool() {
               )}
             </button>
           </div>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 px-4 sm:px-0">
             Test and validate Java/Spring Boot regex patterns with instant feedback.
           </p>
         </div>
 
         {/* Main Tool */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 dark:border-slate-700/50 p-8">
-          <div className="mb-6">
-            <label className="block mb-3 font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 dark:border-slate-700/50 p-4 sm:p-6 lg:p-8">
+          <div className="mb-4 sm:mb-6">
+            <label className="block mb-2 sm:mb-3 font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2 text-sm sm:text-base">
               <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
               Regex Pattern
             </label>
             <input
               type="text"
-              className="w-full font-mono p-4 bg-slate-50 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-600 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 text-gray-900 dark:text-gray-100"
+              className="w-full font-mono p-3 sm:p-4 bg-slate-50 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-600 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 text-gray-900 dark:text-gray-100 text-sm sm:text-base min-h-[48px]"
               value={pattern}
               onChange={e => setPattern(e.target.value)}
               placeholder="e.g. ^[a-zA-Z0-9]+$"
             />
           </div>
-          <div className="mb-6">
-            <label className="block mb-3 font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+          <div className="mb-4 sm:mb-6">
+            <label className="block mb-2 sm:mb-3 font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2 text-sm sm:text-base">
               <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
               Test String
             </label>
             <input
               type="text"
-              className="w-full font-mono p-4 bg-slate-50 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-600 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 text-gray-900 dark:text-gray-100"
+              className="w-full font-mono p-3 sm:p-4 bg-slate-50 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-600 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 text-gray-900 dark:text-gray-100 text-sm sm:text-base min-h-[48px]"
               value={testString}
               onChange={e => setTestString(e.target.value)}
               placeholder="e.g. Hello123"
             />
           </div>
           <button 
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg" 
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg text-sm sm:text-base min-h-[48px]" 
             onClick={handleTest}
           >
             Test Regex

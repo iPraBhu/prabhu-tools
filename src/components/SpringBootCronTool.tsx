@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useSEO } from '../hooks/useSEO';
 
 const cronExamples = [
   { expr: '0 0 * * * *', desc: 'Every hour' },
@@ -127,6 +128,15 @@ function getOrdinalSuffix(num: string): string {
 }
 
 export default function SpringBootCronTool() {
+  useSEO({
+    title: 'Cron Expression Generator & Validator | Spring Boot Cron Job Scheduler - PraBhu Tools',
+    description: 'Generate and validate cron expressions for Spring Boot applications. Free online cron job scheduler with human-readable explanations and real-time validation.',
+    keywords: 'cron expression generator, spring boot cron, cron job scheduler, cron validator, crontab generator, spring boot scheduler, cron syntax, quartz cron expressions',
+    canonical: 'https://tools.adevguide.com/tools/spring-boot-cron-tool',
+    ogTitle: 'Cron Expression Generator - Spring Boot Scheduler Tool',
+    ogDescription: 'Create and validate cron expressions for Spring Boot with instant human-readable explanations.',
+  });
+
   const { theme, toggleTheme } = useTheme();
   const [cron, setCron] = useState('0 0 * * * *');
   const [explanation, setExplanation] = useState(explainCron('0 0 * * * *'));
@@ -142,17 +152,17 @@ export default function SpringBootCronTool() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 py-8 px-4 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 py-6 sm:py-8 px-4 transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex justify-center items-center gap-4 mb-6">
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent text-center px-2">
               Spring Boot Cron Tool
             </h1>
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-white/10 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-gray-700 hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-200"
+              className="p-2 sm:p-3 rounded-lg bg-white/10 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-gray-700 hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
@@ -166,16 +176,16 @@ export default function SpringBootCronTool() {
               )}
             </button>
           </div>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto px-4 sm:px-0">
             Professional Spring Boot schedule expression editor. Enter your 6-field cron expression to get a human-readable description.
           </p>
         </div>
 
         {/* Main Tool */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 dark:border-slate-700/50 p-8 mb-8">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 dark:border-slate-700/50 p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8">
           {/* Input Section */}
-          <div className="mb-6">
-            <label className="block text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
+          <div className="mb-4 sm:mb-6">
+            <label className="block text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2 sm:mb-3 flex items-center gap-2">
               <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
               Cron Expression
             </label>
@@ -184,19 +194,19 @@ export default function SpringBootCronTool() {
                 type="text"
                 value={cron}
                 onChange={(e) => setCron(e.target.value)}
-                className="w-full text-2xl font-mono p-4 bg-slate-50 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-600 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 text-gray-900 dark:text-gray-100"
+                className="w-full text-base sm:text-lg lg:text-xl xl:text-2xl font-mono p-3 sm:p-4 bg-slate-50 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-600 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 text-gray-900 dark:text-gray-100 min-h-[56px] pr-12 sm:pr-16"
                 placeholder="0 0 * * * *"
               />
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+              <div className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2">
                 {explanation.isValid ? (
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 sm:gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-green-500 text-xl font-bold">✓</span>
+                    <span className="text-green-500 text-lg sm:text-xl font-bold">✓</span>
                   </div>
                 ) : (
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 sm:gap-2">
                     <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                    <span className="text-red-500 text-xl font-bold">✗</span>
+                    <span className="text-red-500 text-lg sm:text-xl font-bold">✗</span>
                   </div>
                 )}
               </div>
