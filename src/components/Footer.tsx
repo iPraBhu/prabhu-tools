@@ -6,20 +6,20 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 dark:bg-slate-950 text-white border-t border-gray-800 dark:border-slate-800 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+      <div className="max-w-7xl mx-auto py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between md:items-center">
           {/* Copyright */}
-          <div className="text-sm text-gray-400 dark:text-gray-500">
+          <div className="text-sm text-gray-400 dark:text-gray-500 text-center md:text-left">
             © {currentYear} PraBhu Tools. All rights reserved.
           </div>
           
           {/* Links */}
-          <div className="flex space-x-6 text-sm">
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-sm items-center">
             <a 
               href="https://github.com" 
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-300 transition-colors duration-200 flex items-center space-x-1"
+              className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-300 transition-colors duration-200 flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-gray-800 dark:hover:bg-slate-800 min-h-[40px]"
               aria-label="Visit our GitHub repository"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -28,8 +28,8 @@ export default function Footer() {
               <span>GitHub</span>
             </a>
             <a 
-              href="mailto:contact@prabhutools.com" 
-              className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-300 transition-colors duration-200 flex items-center space-x-1"
+              href="mailto:contact@adevguide.com" 
+              className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-300 transition-colors duration-200 flex items-center space-x-1 py-1 px-2 rounded-md hover:bg-gray-800 dark:hover:bg-slate-800 min-h-[40px]"
               aria-label="Contact us via email"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -39,7 +39,7 @@ export default function Footer() {
             </a>
             <a 
               href="/privacy" 
-              className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-300 transition-colors duration-200"
+              className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-300 transition-colors duration-200 py-1 px-2 rounded-md hover:bg-gray-800 dark:hover:bg-slate-800 min-h-[40px] flex items-center"
             >
               Privacy
             </a>
@@ -47,11 +47,11 @@ export default function Footer() {
         </div>
         
         {/* Additional info */}
-        <div className="mt-6 pt-6 border-t border-gray-700 dark:border-slate-800 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-600 mb-2">
+        <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-700 dark:border-slate-800 text-center">
+          <p className="text-xs text-gray-500 dark:text-gray-600 mb-2 px-2">
             Built with ❤️ using React, TypeScript, and Tailwind CSS
           </p>
-          <div className="flex justify-center items-center space-x-4 text-xs text-gray-600 dark:text-gray-700">
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-1 sm:space-y-0 sm:space-x-4 text-xs text-gray-600 dark:text-gray-700">
             <span className="flex items-center">
               <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
               {theme === 'dark' ? 'Dark' : 'Light'} Theme Active

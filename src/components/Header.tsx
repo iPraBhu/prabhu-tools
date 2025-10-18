@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
 import { NavItem } from '../types';
@@ -10,6 +11,15 @@ const navigation: NavItem[] = [
 export default function Header() {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-slate-700 sticky top-0 z-50 transition-colors duration-300">
@@ -38,7 +48,8 @@ export default function Header() {
                   />
                 </svg>
               </div>
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">PraBhu Tools</span>
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent hidden sm:inline">PraBhu Tools</span>
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent sm:hidden text-lg">PraBhu</span>
             </Link>
           </div>
 
@@ -115,17 +126,78 @@ export default function Header() {
             <div className="md:hidden">
               <button
                 type="button"
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 focus:outline-none focus:text-gray-900 dark:focus:text-gray-200 p-2"
-                aria-label="Open main menu"
+                onClick={toggleMobileMenu}
+                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 focus:outline-none focus:text-gray-900 dark:focus:text-gray-200 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-all duration-200"
+                aria-label={isMobileMenuOpen ? 'Close main menu' : 'Open main menu'}
+                aria-expanded={isMobileMenuOpen}
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+                {isMobileMenuOpen ? (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
               </button>
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Mobile menu overlay */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-16 inset-x-0 z-50">
+          <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 shadow-lg">
+            <div className="px-4 py-2 space-y-1">
+              {navigation.map((item) => {
+                const isActive = location.pathname === item.path;
+                const isExternal = item.external;
+                
+                if (isExternal) {
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={closeMobileMenu}
+                      className="flex items-center justify-between px-3 py-3 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg transition-all duration-200"
+                    >
+                      <span>{item.name}</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  );
+                }
+                
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    onClick={closeMobileMenu}
+                    className={`block px-3 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
+                      isActive
+                        ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                        : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-slate-800'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-25 -z-10" 
+            onClick={closeMobileMenu}
+            aria-hidden="true"
+          />
+        </div>
+      )}
     </header>
   );
 }

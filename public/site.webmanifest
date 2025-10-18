@@ -1,0 +1,70 @@
+{
+  "name": "PraBhu Tools - Free Online Calculator & Developer Tools",
+  "short_name": "PraBhu Tools",
+  "description": "Free online calculator tools for developers and finance professionals. Calculate loan payments, test regex patterns, generate cron expressions.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["productivity", "utilities", "finance", "developer"],
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Loan Calculator",
+      "short_name": "Loan Calc",
+      "description": "Calculate monthly loan payments",
+      "url": "/tools",
+      "icons": [
+        {
+          "src": "/favicon-32x32.png",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "Regex Tester",
+      "short_name": "Regex",
+      "description": "Test Java regex patterns",
+      "url": "/tools/spring-boot-regex-tool",
+      "icons": [
+        {
+          "src": "/favicon-32x32.png",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "Cron Generator",
+      "short_name": "Cron",
+      "description": "Generate cron expressions",
+      "url": "/tools/spring-boot-cron-tool",
+      "icons": [
+        {
+          "src": "/favicon-32x32.png",
+          "sizes": "32x32"
+        }
+      ]
+    }
+  ]
+}
